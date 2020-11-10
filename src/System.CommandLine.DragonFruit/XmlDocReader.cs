@@ -91,7 +91,14 @@ namespace System.CommandLine.DragonFruit
                 switch (element.Name.ToString())
                 {
                     case "summary":
-                        commandHelpMetadata.Description = element.Value?.Trim();
+                        if (element.HasElements)
+                        {
+                            commandHelpMetadata.Description = string.Join(" ", element.Elements().Select(e => e.Value + (e.Name.ToString().ToLower() == "para" ? Environment.NewLine : "")));
+                        }
+                        else
+                        {
+                            commandHelpMetadata.Description = element.Value?.Trim();
+                        }
                         break;
                     case "param":
                         commandHelpMetadata.ParameterDescriptions.Add(element.Attribute("name")?.Value, element.Value?.Trim());

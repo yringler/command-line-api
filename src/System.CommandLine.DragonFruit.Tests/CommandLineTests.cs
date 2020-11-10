@@ -66,7 +66,7 @@ namespace System.CommandLine.DragonFruit.Tests
                   .ContainAll("--name <name>", "Specifies the name option")
                   .And.Contain("Options:");
             stdOut.Should()
-                  .Contain("Help for the test program");
+                  .Contain($"Help for the test program{Environment.NewLine}Here's another helpful line");
         }
 
         [Fact]
